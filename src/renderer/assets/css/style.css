@@ -1,0 +1,95 @@
+/**
+ * altera a cor do side bar
+ */
+.skin-blue .wrapper,
+.skin-blue .main-sidebar,
+.skin-blue .left-side {
+  background-color: #40364d !important;
+}
+
+/**
+ * altera a cor da navbar
+ */
+.skin-blue .main-header .navbar {
+  background-color: #e98531;
+}
+
+.skin-blue .main-header .logo {
+  background-color: #40364d;
+  color: #ffffff;
+  border-bottom: 0 solid transparent;
+}
+
+.menu-title-sidebar {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+.div-140 {
+  width: 140px;
+}
+
+.div-160 {
+  width: 160px;
+}
+
+.btn-primary {
+  background-color: #967ADC;
+  border-color: #967ADC;
+  font-size: 14px;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+/**
+ * Table
+ **/
+ tbody > tr > td {
+  text-transform: uppercase !important;
+}
+
+.tableFixHead {
+  overflow-y: auto;
+  max-height: calc(100vh - 340px) !important;
+  font-size: 12px;
+}
+
+.tableFixHead table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableFixHead th,
+.tableFixHead td {
+  padding: 8px 16px;
+}
+
+.tableFixHead th {
+  position: sticky;
+  top: 0;
+  background: rgba(65, 54, 78, 0.86);
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.tableFixHead a {
+  color: inherit;
+}
+
+label {
+  font-weight: normal
+}
+
+.has-warning {
+  border-color: #f39c12;
+  box-shadow: none;
+}
+
+.error {
+  color: red;
+}
+
+.link-primary {
+  color: #967ADC
+}
