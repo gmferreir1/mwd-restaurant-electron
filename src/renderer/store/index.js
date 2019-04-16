@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-const modules = {
+import saleDiary from "../modules/sale/saleDiary/store";
 
+const modules = {
+  saleDiary
 }
 
 Vue.use(Vuex)

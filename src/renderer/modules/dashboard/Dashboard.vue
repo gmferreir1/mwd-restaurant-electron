@@ -1,91 +1,51 @@
 <template>
   <div>
-
-    <!-- Info boxes -->
+    <!--
     <div class="row">
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">CPU Traffic</span>
-            <span class="info-box-number">90<small>%</small></span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
+      <div class="col-md-12">
+        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+          Sistema na versão <code>{{ $systemVersion }}</code>
+        </p>
       </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Likes</span>
-            <span class="info-box-number">41,410</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-
-      <!-- fix for small devices only -->
-      <div class="clearfix visible-sm-block"></div>
-
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Sales</span>
-            <span class="info-box-number">760</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">New Members</span>
-            <span class="info-box-number">2,000</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
+    -->
+    <div class="row">
+      <div class="col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-green">
+            <i class="fa fa-cart-plus"></i>
+          </span>
 
+          <div class="info-box-content">
+            <span class="info-box-text">Reltório de Vendas</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
-import Bus from '../../util/bus'
+import Bus from "../../util/bus";
 export default {
   name: "Dashboard",
   data() {
     return {
-      myDataVar: ''
-    }
+      myDataVar: ""
+    };
   },
   methods: {
     logout() {
-      localStorage.clear()
+      localStorage.clear();
     }
   },
   mounted() {
-    this.$electron.ipcRenderer.on('logout', (event, data) => {
-      this.logout()
-    })
+    this.$electron.ipcRenderer.on("logout", (event, data) => {
+      this.logout();
+    });
   }
-}
+};
 </script>
 
 <style scoped>

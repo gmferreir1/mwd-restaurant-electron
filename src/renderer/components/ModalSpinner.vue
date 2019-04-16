@@ -41,10 +41,8 @@ export default {
   mounted() {
     
     this.$bus.$on('openLoading', (message) => {
-
-      console.log("oap")
-
-      if (message) {
+  
+    if (message) {
         this.message = message;
       } else {
         this.message = "Processando dados ...";

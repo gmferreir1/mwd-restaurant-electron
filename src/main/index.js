@@ -1,5 +1,7 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
 const PDFWindow = require("electron-pdf-window");
+const ipc = require('electron').ipcRenderer;
+const path = require('path');
 
 /**
  * Set `__static` path to static files in production
@@ -26,15 +28,23 @@ function createWindow() {
     width: 1000,
     useContentSize: true,
     fullscreen: false,
+    icon: path.join(__dirname, '../renderer/assets/icons/64x64.png')
     /*
     webPreferences: {
       devTools: true
     }
     */
   });
-  
+
   mainWindow.maximize();
   mainWindow.loadURL(winURL);
+  
+  /*
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('checkUpdate', 'whoooooooh!')
+  })
+  */
+
 
   mainWindow.on("closed", () => {
     mainWindow = null;
@@ -60,6 +70,7 @@ app.on("ready", createWindow);
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
+    mainWindow.webContents.send('clearLocalStorage');
   }
 });
 

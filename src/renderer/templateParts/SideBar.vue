@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
 
@@ -51,18 +51,31 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">HEADER</li>
-          <li class="active">
-            <a href="#"><i class="fa fa-align-left"></i> <span>Venda Diária</span></a>
+          
+          <li :class="{active: $route.name === 'dashboard' }">
+            <router-link :to="{name: 'dashboard'}">
+              <i class="fa fa-home"></i> <span>Dashboard</span>
+            </router-link>
           </li>
+         
+          <li :class="{active: $route.name === 'sale_diary' }">
+            <router-link :to="{name: 'sale_diary'}">
+              <i class="fa fa-align-left"></i> <span>Venda Diária</span>
+            </router-link>
+          </li>
+
+          <li>
+            <router-link :to="{name: 'sale_report'}">
+              <i class="fa fa-area-chart"></i> <span>Relatório de Vendas</span>
+            </router-link>
+          </li>
+
         </ul>
         <!-- /.sidebar-menu -->
       </section>
       <!-- /.sidebar -->
 
-      <router-link :to="{name: 'systemAdmin_dashboard'}" class="setting" title="Administração do sistema">
-        <i class="fa fa-cog" style="font-size: 20px;"></i>
-      </router-link>
+      
 
     </aside>
 
@@ -75,12 +88,3 @@ export default {
 }
 </script>
 
-
-<style scoped>
-.setting {
-  position: absolute;
-  top: 93%;
-  color: #ffffff;
-  left: 15px;
-}
-</style>

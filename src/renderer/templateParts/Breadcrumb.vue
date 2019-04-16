@@ -1,29 +1,28 @@
 <template>
   <div>
-    <section class="content-header">
-      <span
-        class="text-breadcrumb"
-        v-if="this.array_links.length"
-      >{{ this.array_links[this.array_links.length - 1].name }}</span>
+    <div class="breadcrumb">
+      <section class="content-header">
+        <span class="text-breadcrumb" v-if="this.array_links.length">{{ this.array_links[this.array_links.length - 1].name }}</span>
 
-      <ol class="breadcrumb" v-if="array_links">
-        <li
-          v-for="(list, index) in this.array_links"
-          :key="index"
-          :class="{active: index === (array_links.length - 1)}"
-        >
-          <router-link
-            class="active"
-            v-if="index !== (array_links.length - 1)"
-            :to="{name: list.link}"
+        <ol v-if="array_links" class="ol-breadcrumb">
+          <li style="float: left; list-style: none; padding-left: 10px; font-size: 11px"
+            v-for="(list, index) in this.array_links"
+            :key="index"
+            :class="{active: index === (array_links.length - 1)}"
           >
-            <i class="fa fa-list-alt"></i>
-            {{list.name}}
-          </router-link>
-          <span v-if="index === (array_links.length - 1)">{{list.name}}</span>
-        </li>
-      </ol>
-    </section>
+            <router-link
+              class="active"
+              v-if="index !== (array_links.length - 1)"
+              :to="{name: list.link}"
+            >
+              <i class="fa fa-list-alt"></i>
+              {{list.name}}
+            </router-link>
+            <span v-if="index === (array_links.length - 1)">{{list.name}}</span>
+          </li>
+        </ol>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -39,7 +38,15 @@ export default {
     mountBreadcrumb() {
       const routeName = this.$route.name;
 
-     
+      if (routeName === "dashboard") {
+        this.array_links = [
+          {
+            name: "Dashbooard",
+            link: "dashboard"
+          }
+        ];
+      }
+      
       if (routeName === "systemAdmin_dashboard") {
         this.array_links = [
           {
@@ -61,6 +68,25 @@ export default {
           }
         ];
       }
+
+      if (routeName === "sale_diary") {
+        this.array_links = [
+          {
+            name: "Venda Diária",
+            link: "sale_diary"
+          }
+        ];
+      }
+     
+      if (routeName === "sale_report") {
+        this.array_links = [
+          {
+            name: "Relatório de Vendas",
+            link: "sale_report"
+          }
+        ];
+      }
+
     }
   },
   watch: {
@@ -76,8 +102,32 @@ export default {
 
 <style scoped>
 .text-breadcrumb {
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.breadcrumb {
+  margin-bottom: 0px;
+  background-color: #ffffff;
+  height: 35px !important;
+  padding-top: 5px;
+  -webkit-box-shadow: 0px 0px 0px rgba(50, 50, 50, 0.77);
+  -moz-box-shadow: 0px 0px 0px rgba(50, 50, 50, 0.77);
+  box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.77);
+}
+
+.content-header {
+  position: relative;
+  padding: 0px;
+}
+
+.ol-breadcrumb {
+  position: absolute; right: 10px; top: 5px; height: 25px !important; border:none !important;
+}
+
+.ol-breadcrumb > li + li:before {
+  content: '>\00a0';
+}
+
 </style>

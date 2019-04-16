@@ -9,10 +9,11 @@
 
 /**
  * altera a cor da navbar
- */
+ 
 .skin-blue .main-header .navbar {
   background-color: #e98531;
 }
+*/
 
 .skin-blue .main-header .logo {
   background-color: #40364d;
@@ -24,7 +25,6 @@
   font-weight: bold;
   text-transform: uppercase;
 }
-
 
 .div-140 {
   width: 140px;
@@ -92,4 +92,87 @@ label {
 
 .link-primary {
   color: #967ADC
+}
+
+::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2em
+}
+::-webkit-scrollbar-button {
+  background: #ccc
+}
+::-webkit-scrollbar-track-piece {
+  background: #888
+}
+::-webkit-scrollbar-thumb {
+  background: #eee
+}
+
+.skin-blue .main-header .navbar {
+  background-color:rgba(71, 144, 105, 0.84);
+  /*background-color:rgb(138, 5, 190); */
+}
+
+.main-header .navbar {
+  min-height: 30px !important;
+}
+
+.navbar {
+  min-height: 30px !important;
+  margin-left: 0px !important;
+}
+
+.dropdown-toggle {
+  height: 35px !important;
+  padding-top: 8px !important;
+}
+
+/*
+ * modals
+ */
+ @media (min-width: 768px) {
+  .modal-xl {
+      max-width: 99% !important;
+  }
+}
+
+/*
+* modals
+*/
+@media (min-width: 768px) {
+  .modal-md {
+      width: 65%;
+  }
+}
+
+/*
+* modals
+*/
+@media (min-width: 200px) {
+  .modal-sm {
+      width: 50% !important;
+  }
+}
+
+/* sweet alert */
+.swal-footer {
+  background-color: rgb(245, 248, 250);
+  margin-top: 32px;
+  border-top: 1px solid #E9EEF1;
+  overflow: hidden;
+}
+
+.swal-button--confirm {
+  padding: 7px 50px;
+  border-radius: 2px;
+  font-size: 12px;
+  border: none;
+}
+
+.swal-button {
+  padding: 7px 50px;
+}
+
+.swal-overlay--show-modal, .swal-modal {
+  animation: none !important;
 }

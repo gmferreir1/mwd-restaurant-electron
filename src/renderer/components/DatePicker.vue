@@ -52,3 +52,10 @@ export default {
   }
 }
 </script>
+
+<style>
+/*
+  @import "../../renderer/assets/css/jquery.ui.datepicker.css";
+  */
+</style>
+

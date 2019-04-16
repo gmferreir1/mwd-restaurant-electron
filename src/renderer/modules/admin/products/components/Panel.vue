@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="box box-default">
           <div class="box-header with-border" style="padding-top: 3px">
             <h3 class="box-title" style="padding-bottom: 10px; padding-top: 5px;">
@@ -101,6 +101,7 @@ export default {
       http.post("product", this.form)
         .then(result => {
           _notification.success();
+          this.$emit("refreshProductsList");
           this.cleanForm();
         })
         .catch(err => {})

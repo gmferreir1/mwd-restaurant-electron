@@ -6,23 +6,23 @@
 
     <!-- Main Header -->
     <header class="main-header">
-      <!-- Logo -->
+      <!-- Logo 
       <a v-show="!hide_components" href="#" @click.prevent class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
+       
         <span class="logo-mini">
           <b>M</b>WD
         </span>
-        <!-- logo for regular state and mobile devices -->
+        
         <span class="logo-lg">
           <b>Admin</b>LTE
         </span>
       </a>
 
-      <!-- Header Navbar -->
+       Header Navbar -->
 
-      <!-- navBar 
-      <nav-bar v-if="$route.name != 'auth'" />
-      navBar-->
+      <!-- navBar -->
+      <nav-bar v-show="!hide_components" />
+      <!-- navBar-->
     </header>
 
     <!-- sideBar -->
@@ -44,9 +44,9 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <!-- footer -->
+    <!-- footer 
     <template-footer v-show="!hide_components"/>
-    <!-- / footer -->
+     / footer -->
 
     <!-- Control Sidebar 
     <control-side-bar v-if="$route.name != 'auth'" />
@@ -83,15 +83,20 @@ export default {
         this.hide_components = false;
         this.styleObject = {
           "margin-left": "50px !important",
-          "min-height": "950px !important"
+          //"min-height": "950px !important"
         };
 
       } else {
+        this.styleObject = {
+          "margin-left": "0px !important"
+        };
         this.hide_components = true;
       }
     }
   },
   mounted() {
+    setTimeout(() => this.$electron.ipcRenderer.send('init'), 5000);
+
     if (this.$route.name !== "auth") {
 
       this.styleObject = {
@@ -102,6 +107,10 @@ export default {
     } else {
       this.hide_components = true;
     }
+
+  this.$electron.ipcRenderer.on('clearLocalStorage', (event, data) => {
+    window.localStorage.clear();
+  })
 
     process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = true;
   }

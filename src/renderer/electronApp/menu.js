@@ -1,88 +1,77 @@
-import { Menu, app, BrowserWindow } from "electron";
+import { Menu, app, BrowserWindow, ipcMain } from "electron";
 
 const template = [
   {
-    label: "Edit",
+    role: "help",
+    label: "Arquivo",
     submenu: [
-      { role: "undo" },
-      { role: "redo" },
-      { type: "separator" },
-      { role: "cut" },
-      { role: "copy" },
-      { role: "paste" },
-      { role: "pasteandmatchstyle" },
-      { role: "delete" },
-      { role: "selectall" }
-    ]
-  },
-  {
-    label: "View",
-    submenu: [
-      { role: "reload" },
-      { role: "forcereload" },
-      { role: "toggledevtools" },
-      { type: "separator" },
-      { role: "resetzoom" },
-      { role: "zoomin" },
-      { role: "zoomout" },
-      { type: "separator" },
-      { role: "togglefullscreen" }
+      {
+        label: "Fechar Janela",
+        click() {
+          const focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("clearLocalStorage");
+          app.quit();
+        }
+      }
     ]
   },
   {
     role: "window",
-    submenu: [{ role: "minimize" }, { role: "close" }]
+    submenu: [{ role: "minimize" }]
   },
   {
     role: "help",
     label: "Ajuda",
     submenu: [
       {
-        label: "Sair do Sistema",
-        click() {
-          const focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send("logout");
-          app.quit();
-        }
+        label: "Sobre o Sistema"
       }
     ]
   }
 ];
 
-if (process.platform === "darwin") {
-  template.unshift({
-    label: app.getName(),
-    submenu: [
-      { role: "about" },
-      { type: "separator" },
-      { role: "services" },
-      { type: "separator" },
-      { role: "hide" },
-      { role: "hideothers" },
-      { role: "unhide" },
-      { type: "separator" },
-      { role: "quit" }
-    ]
-  });
-
-  // Edit menu
-  template[1].submenu.push(
-    { type: "separator" },
+/*
+ipcMain.on('init', (event, data) => {
+  const template = [
     {
-      label: "Speech",
-      submenu: [{ role: "startspeaking" }, { role: "stopspeaking" }]
+      role: "help",
+      label: "Arquivo",
+      submenu: [
+        {
+          label: "Logout",
+          click() {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            focusedWindow.webContents.send("logout");
+          }
+        },
+        {
+          label: "Fechar Janela",
+          click() {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            focusedWindow.webContents.send("clearLocalStorage");
+            app.quit();
+          }
+        }
+      ]
+    },
+    {
+      role: "window",
+      submenu: [{ role: "minimize" }]
+    },
+    {
+      role: "help",
+      label: "Ajuda",
+      submenu: [
+        {
+          label: "Sobre o Sistema"
+        }
+      ]
     }
-  );
-
-  // Window menu
-  template[3].submenu = [
-    { role: "close" },
-    { role: "minimize" },
-    { role: "zoom" },
-    { type: "separator" },
-    { role: "front" }
   ];
-}
 
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+})
+*/
 const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+Menu.setApplicationMenu(null);

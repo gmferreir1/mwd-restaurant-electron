@@ -2,7 +2,7 @@
   <div>
     <div class="login-form">
       <form @submit.prevent="doLogin">
-        <h2 class="text-center">MWD</h2>
+        <h2 class="text-center">LOGIN</h2>
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon">
@@ -39,11 +39,18 @@
             class="btn btn-primary login-btn btn-block"
             :disabled="!form.login || !form.password"
             v-if="!loading"
-          >Sign in</button>
+          >Entrar no Sistema</button>
         </div>
-        <div class="clearfix">
-          <a href="#" class="pull-right" @click.prevent>Esqueceu a senha?</a>
+        <div>
+          <span v-if="show_error_login" class="error">{{ message_error_login }}</span>
         </div>
+
+        <!--
+        <div v-if="system_update">
+          <div class="loader"></div>
+        
+        </div>
+        -->
       </form>
     </div>
   </div>
@@ -56,6 +63,8 @@ export default {
     return {
       loading: false,
       show_error_login: false,
+      system_update: true,
+      message_error_login: "",
       form: {
         login: "",
         password: ""
@@ -79,10 +88,14 @@ export default {
           this.getDataUserLogged();
         })
         .catch(err => {
+          console.log(err)
           this.loading = false;
           if (err.response.status === 401) {
-            this.show_error_login = true;
+            this.message_error_login = "Usuário ou senha inválidos";
+          } else {
+            this.message_error_login = "Erro ao efetuar login";
           }
+          this.show_error_login = true;
         });
     },
     getDataUserLogged() {
@@ -105,8 +118,7 @@ export default {
             this.$router.push({ name: "dashboard" });
           }, 1500);
         })
-        .catch(() => {
-          this.show_error_login = true;
+        .catch(err => {
           this.loading = false;
         });
     }
