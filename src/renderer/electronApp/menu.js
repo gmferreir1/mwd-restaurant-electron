@@ -74,4 +74,4 @@ ipcMain.on('init', (event, data) => {
 })
 */
 const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(null);
+//Menu.setApplicationMenu(null);

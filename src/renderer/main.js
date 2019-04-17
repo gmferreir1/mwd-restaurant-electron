@@ -4,10 +4,12 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 import http from "./util/http";
+const version = require("../../package.json").version;
 
 
 window.http = http;
-Vue.prototype.$systemVersion = "0.0.1";
+Vue.prototype.$systemVersion = version;
+Vue.prototype.$NODE_ENV = process.env.NODE_ENV;
 
 // Event Bus
 import EventBus from './plugins/event-bus'

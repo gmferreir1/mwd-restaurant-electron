@@ -38,19 +38,39 @@ function createWindow() {
 
   mainWindow.maximize();
   mainWindow.loadURL(winURL);
-  
+
   /*
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.send('checkUpdate', 'whoooooooh!')
   })
   */
 
+  mainWindow.webContents.on('did-finish-load', () => {
+
+
+
+
+
+    /*
+    autoUpdater.on("update-not-available", () => {
+      mainWindow.webContents.send('messageUpdate', "Atualização não disponiveis no momento");
+    })
+    
+    autoUpdater.on("update-available", () => {
+      mainWindow.webContents.send('updateAvailable');
+    })
+    */
+
+  })
+  mainWindow.openDevTools()
 
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
 
   require("../renderer/electronApp/menu");
+
+  mainWindow.setMenuBarVisibility(false);
 
   /*
   ipcMain.on("printPdf", (event, data) => {
@@ -87,6 +107,55 @@ app.on("activate", () => {
  * support auto updating. Code Signing with a valid certificate is required.
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
+
+import { autoUpdater } from 'electron-updater'
+
+ipcMain.on('checkUpdates', (event, data) => {
+
+
+
+  autoUpdater.on("update-not-available", () => {
+    event.sender.send('updateNotAvailable');
+  })
+
+  autoUpdater.on("update-available", () => {
+    event.sender.send('updateAvailable');
+  })
+
+  autoUpdater.on('download-progress', (progressObj) => {
+    let log_message = "Download speed: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+
+    event.sender.send('downloadProgress', log_message);
+  })
+
+
+  autoUpdater.on('update-downloaded', () => {
+    autoUpdater.quitAndInstall()
+  })
+
+})
+
+
+
+
+autoUpdater.logger = require("electron-log");
+autoUpdater.logger.transports.file.level = "info";
+
+
+if (process.env.NODE_ENV === 'production') {
+  //autoUpdater.updateConfigPath = path.join("/home/guilherme/Programing/mwd-restaurant/electron/app-update.yml");
+  autoUpdater.checkForUpdates();
+}
+
+
+
+
+
+
+
+
 
 /*
 import { autoUpdater } from 'electron-updater'

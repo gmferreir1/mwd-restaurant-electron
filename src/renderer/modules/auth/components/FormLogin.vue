@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="login-form">
+      <span style="float: right; margin-top: 10px; margin-right: 10px;">versão: {{ $systemVersion }}</span>
+
       <form @submit.prevent="doLogin">
         <h2 class="text-center">LOGIN</h2>
         <div class="form-group">
@@ -45,12 +47,7 @@
           <span v-if="show_error_login" class="error">{{ message_error_login }}</span>
         </div>
 
-        <!--
-        <div v-if="system_update">
-          <div class="loader"></div>
-        
-        </div>
-        -->
+       
       </form>
     </div>
   </div>
@@ -63,7 +60,6 @@ export default {
     return {
       loading: false,
       show_error_login: false,
-      system_update: true,
       message_error_login: "",
       form: {
         login: "",
@@ -88,7 +84,7 @@ export default {
           this.getDataUserLogged();
         })
         .catch(err => {
-          console.log(err)
+          console.log(err);
           this.loading = false;
           if (err.response.status === 401) {
             this.message_error_login = "Usuário ou senha inválidos";

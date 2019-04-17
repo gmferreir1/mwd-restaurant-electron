@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ dt }}
     <form-login/>
   </div>
 </template>
@@ -9,11 +10,13 @@ import FormLogin from "./components/FormLogin";
 export default {
   name: "Main",
   components: { FormLogin },
+  data() {
+    return {
+      dt: ""
+    }
+  },
   mounted() {
-    this.$electron.ipcRenderer.on("checkUpdate", (event, data) => {
-      console.log("passou");
-      //this.check_update = true;
-    });
+    
   }
 };
 </script>
